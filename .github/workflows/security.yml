@@ -21,6 +21,7 @@ jobs:
         # uses: paysense-india-services/LPWEB-SecurityHeaderAction@main
         with:
           url: 'https://sandbox-web.lazypay.in/needhelp'
+          output: rating  
       - name: checking if output is available
         id: check-output
         run: echo "${{ steps.security-check.outputs.rating }}"
