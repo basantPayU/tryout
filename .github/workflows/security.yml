@@ -23,7 +23,7 @@ jobs:
           url: 'https://sandbox-web.lazypay.in/needhelp'
       - name: checking if output is available
         id: check-output
-        run: echo "${{ steps.response-header-security-check.outputs.RATING }}"
+        run: echo "${{ steps.response-header-security-check.outputs.rating }}"
        
     
 
