@@ -3,6 +3,7 @@
 name: production_node_workflow
 
 on:
+  workflow_dispatch:
   push:
     branches: [ main ]
 
