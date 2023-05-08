@@ -1,0 +1,28 @@
+# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
+
+name: production_node_workflow
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:      
+  test_response_headers:
+    runs-on: ubuntu-latest
+
+    env:
+      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEB_HOOK_URL }} #required to slack post
+
+    steps:
+      - name: response-header-security-check
+        id: security-check
+        uses: basantPayU/security-headers-check-github-action@main
+        # uses: paysense-india-services/LPWEB-SecurityHeaderAction@main
+        with:
+          url: 'https://sandbox-web.lazypay.in/needhelp'
+      - name: checking if output is available
+        id: check-output
+        run: echo "${{ steps.response-header-security-check.outputs.RATING }}"
+       
+    
+
