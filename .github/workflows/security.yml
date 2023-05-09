@@ -33,7 +33,7 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            console.log('the output is', "${{ steps.security-check.outputs.result }}")
+            console.log('the output is', "${{ steps.security-check.outputs.rating }}")
             const allSecurityHeaderPresent = `{{ steps.security-check.outputs.result.rating }}`=== "success"
             const msg = allSecurityHeaderPresent ? 'All security header present 🚀' : 'Security Header missing, please check action form more details '
             await github.rest.issues.createComment({
