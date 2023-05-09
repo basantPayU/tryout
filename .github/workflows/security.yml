@@ -35,7 +35,7 @@ jobs:
           script: |
             console.log('the output is', "${{ steps.security-check.outputs.rating }}")
             const allSecurityHeaderPresent = "${{ steps.security-check.outputs.rating }}" ===  "success"
-            const msg = allSecurityHeaderPresent ? 'All security header present 🚀' : 'Security Header missing, please check action form more details '
+            const msg = allSecurityHeaderPresent ? '#FF0000 All security header present 🚀' : '#FF0000 Security Header missing, please check action form more details '
             await github.rest.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
