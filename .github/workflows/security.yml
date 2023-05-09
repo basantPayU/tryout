@@ -28,14 +28,14 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            let fs = require('fs');
-            let issue_number = Number(fs.readFileSync('./pr_number'));
+            const allSecurityHeaderPresent = `{{ steps.security-check.outputs.rating }}`=== "success"
+            const msg = allSecurityHeaderPresent ? 'All security header present 🚀' : 'Security Header missing, please check action form more details '
             await github.rest.issues.createComment({
+              issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              issue_number: issue_number,
-              body: 'Thank you for the PR!'
-            });
+              body: '👋 Thanks for reporting!'
+            })
 
         # with:
         #   github-token: ${{secrets.GITHUB_TOKEN}}
