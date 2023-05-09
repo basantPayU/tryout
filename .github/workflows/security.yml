@@ -8,6 +8,7 @@ on:
     types: [opened, reopened]
   push:
     branches: [ main ]
+
 permissions:
   # All other permissions are set to none
   checks: write
@@ -41,7 +42,7 @@ jobs:
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: '👋 Thanks for reporting!'
+              body: msg
             })
 
         # with:
