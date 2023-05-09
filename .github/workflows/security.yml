@@ -21,10 +21,27 @@ jobs:
         # uses: paysense-india-services/LPWEB-SecurityHeaderAction@main
         with:
           url: 'https://sandbox-web.lazypay.in/needhelp'
-          output: rating  
-      - name: checking if output is available
-        id: check-output
-        run: echo "${{ steps.security-check.outputs.rating }}"
+          output: rating 
+      - name: comment-security-check-on-PR
+        id: security-check-comment
+        uses: actions/github-script@v3
+        with:
+          # github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            const allSecurityHeaderPresent = steps.security-check.outputs.rating === "success"
+            const msg = allSecurityHeaderPresent ? 'All security header present 🚀' : 'Security Header missing, please check action form more details '
+            github.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: '👋 Thanks for reporting!'
+            })
+      # - uses: marocchino/sticky-pull-request-comment@v2
+      #   with:
+      #     message: ${{ steps.coverage.outputs.report }}     
+      # - name: checking if output is available
+      #   id: check-output
+      #   run: echo "${{ steps.security-check.outputs.rating }}"
        
     
 
