@@ -26,7 +26,7 @@ jobs:
         id: security-check-comment
         uses: actions/github-script@v3
         with:
-          # github-token: ${{secrets.GITHUB_TOKEN}}
+          github-token: ${{secrets.GITHUB_TOKEN}}
           script: |
             const allSecurityHeaderPresent = `{{ steps.security-check.outputs.rating }}`=== "success"
             const msg = allSecurityHeaderPresent ? 'All security header present 🚀' : 'Security Header missing, please check action form more details '
