@@ -22,20 +22,32 @@ jobs:
         with:
           url: 'https://sandbox-web.lazypay.in/needhelp'
           output: rating 
-      - name: comment-security-check-on-PR
+      - name: 'Comment on PR'
         id: security-check-comment
-        uses: actions/github-script@v3
+        uses: actions/github-script@v5
         with:
-          github-token: ${{secrets.GITHUB_TOKEN}}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const allSecurityHeaderPresent = `{{ steps.security-check.outputs.rating }}`=== "success"
-            const msg = allSecurityHeaderPresent ? 'All security header present 🚀' : 'Security Header missing, please check action form more details '
-            github.issues.createComment({
-              issue_number: context.issue.number,
+            let fs = require('fs');
+            let issue_number = Number(fs.readFileSync('./pr_number'));
+            await github.rest.issues.createComment({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: '👋 Thanks for reporting!'
-            })
+              issue_number: issue_number,
+              body: 'Thank you for the PR!'
+            });
+
+        # with:
+        #   github-token: ${{secrets.GITHUB_TOKEN}}
+        #   script: |
+        #     const allSecurityHeaderPresent = `{{ steps.security-check.outputs.rating }}`=== "success"
+        #     const msg = allSecurityHeaderPresent ? 'All security header present 🚀' : 'Security Header missing, please check action form more details '
+        #     github.issues.createComment({
+        #       issue_number: context.issue.number,
+        #       owner: context.repo.owner,
+        #       repo: context.repo.repo,
+        #       body: '👋 Thanks for reporting!'
+        #     })
       # - uses: marocchino/sticky-pull-request-comment@v2
       #   with:
       #     message: ${{ steps.coverage.outputs.report }}     
