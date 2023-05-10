@@ -41,9 +41,7 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               body: `
-                ```
-                 ${msg}
-                ```
+                <span style="color:red">Text</span>
               `
             })
 
