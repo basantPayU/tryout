@@ -40,7 +40,12 @@ jobs:
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: echo -e "\033[31;1;4mHello\033[0m"
+              body: `
+                ```diff
+                  + this text is highlighted in green
+                  - this text is highlighted in red
+                ```
+              `
                 
             })
 
