@@ -17,7 +17,7 @@ jobs:
         urls: 'https://google.com'
         # urls: 'https://sandbox-web.lazypay.in'
         prCommentEnabled: true
-        gitHubAccessToken: ${{ secrets.LIGHTHOUSE_CHECK_GITHUB_ACCESS_TOKEN }}
+        # gitHubAccessToken: ${{ secrets.LIGHTHOUSE_CHECK_GITHUB_ACCESS_TOKEN }}
         device: mobile
 
     - name: Verify Lighthouse Check results
