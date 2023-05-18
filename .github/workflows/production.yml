@@ -11,14 +11,11 @@ jobs:
     steps:
     - uses: actions/checkout@master
     - name: Lighthouse
-      uses: foo-software/lighthouse-check-action@master
+      uses: foo-software/lighthouse-check-action@v10.0.0
       id: lighthouseCheck
       with:
         urls: 'https://sandbox-web.lazypay.in'
-        # gitAuthor: ${{ github.actor }}
-        # gitBranch: ${{ github.ref }}
-        # gitHubAccessToken: ${{ secrets.LIGHTHOUSE_CHECK_GITHUB_ACCESS_TOKEN }}
-        # sha: ${{ github.sha }}
+        gitHubAccessToken: ${{ secrets.LIGHTHOUSE_CHECK_GITHUB_ACCESS_TOKEN }}
         device: mobile
 
     - name: Verify Lighthouse Check results
@@ -30,7 +27,9 @@ jobs:
         minPerformanceScore: "20"
         minProgressiveWebAppScore: "50"
         minSeoScore: "50"  
-
+        # - name: Lighthouse Check
+        # uses: 
+      
   # lighthouse-desktop:
   #   runs-on: ubuntu-latest
   #   steps:
