@@ -15,13 +15,11 @@ jobs:
       id: lighthouseCheck
       with:
         urls: 'https://sandbox-web.lazypay.in'
-        gitAuthor: ${{ github.actor }}
-        gitBranch: ${{ github.ref }}
-        gitHubAccessToken: ${{ secrets.LIGHTHOUSE_CHECK_GITHUB_ACCESS_TOKEN }}
-        sha: ${{ github.sha }}
+        # gitAuthor: ${{ github.actor }}
+        # gitBranch: ${{ github.ref }}
+        # gitHubAccessToken: ${{ secrets.LIGHTHOUSE_CHECK_GITHUB_ACCESS_TOKEN }}
+        # sha: ${{ github.sha }}
         device: mobile
-
-        # slackWebhookUrl: ${{ secrets.LIGHTHOUSE_CHECK_WEBHOOK_URL }}
 
     - name: Verify Lighthouse Check results
       uses: foo-software/lighthouse-check-status-action@master
