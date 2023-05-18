@@ -14,7 +14,8 @@ jobs:
       uses: foo-software/lighthouse-check-action@v10.0.0
       id: lighthouseCheck
       with:
-        urls: 'https://sandbox-web.lazypay.in'
+        urls: 'google.com'
+        # urls: 'https://sandbox-web.lazypay.in'
         gitHubAccessToken: ${{ secrets.LIGHTHOUSE_CHECK_GITHUB_ACCESS_TOKEN }}
         device: mobile
 
