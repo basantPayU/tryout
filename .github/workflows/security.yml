@@ -26,7 +26,6 @@ jobs:
         # uses: paysense-india-services/LPWEB-SecurityHeaderAction@main
         with:
           url: 'https://sandbox-web.lazypay.in/needhelp'
-          output: rating 
       - name: 'Comment on PR'
         id: security-check-comment
         uses: actions/github-script@v6
