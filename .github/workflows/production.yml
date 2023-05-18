@@ -26,8 +26,8 @@ jobs:
       id: lighthouseCheck
       with:
         outputDirectory: ${{ github.workspace }}/tmp/artifacts
-        # urls: 'https://google.com'
-        urls: 'https://sandbox-web.lazypay.in'
+        urls: 'https://google.com'
+        # urls: 'https://sandbox-web.lazypay.in'
         prCommentEnabled: true
         prCommentSaveOld: true
         sha: ${{ github.sha }}
