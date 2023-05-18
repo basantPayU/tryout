@@ -15,7 +15,7 @@ jobs:
       id: lighthouseCheck
       with:
         urls: 'https://sandbox-web.lazypay.in'
-        gitHubAccessToken: ${{ secrets.LIGHTHOUSE_CHECK_GITHUB_ACCESS_TOKEN }}
+        accessToken: ${{ secrets.LIGHTHOUSE_CHECK_GITHUB_ACCESS_TOKEN }}
         device: mobile
         # slackWebhookUrl: ${{ secrets.LIGHTHOUSE_CHECK_WEBHOOK_URL }}
 
@@ -38,7 +38,7 @@ jobs:
       id: lighthouseCheck
       with:
         urls: 'https://sandbox-web.lazypay.in'
-        gitHubAccessToken: ${{ secrets.LIGHTHOUSE_CHECK_GITHUB_ACCESS_TOKEN }}
+        accessToken: ${{ secrets.LIGHTHOUSE_CHECK_GITHUB_ACCESS_TOKEN }}
         device: desktop
         # slackWebhookUrl: ${{ secrets.LIGHTHOUSE_CHECK_WEBHOOK_URL }}
 
