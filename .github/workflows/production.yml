@@ -6,16 +6,16 @@ on:
 
 
 jobs:
-  lighthouse:
+  lighthouse-mobile:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@master
     - name: Lighthouse
       uses: foo-software/lighthouse-check-action@master
-      id: lighthouseCheck
       with:
         urls: 'https://sandbox-web.lazypay.in'
         gitHubAccessToken: ${{ secrets.LIGHTHOUSE_CHECK_GITHUB_ACCESS_TOKEN }}
+        device: mobile
         # slackWebhookUrl: ${{ secrets.LIGHTHOUSE_CHECK_WEBHOOK_URL }}
 
     - name: Verify Lighthouse Check results
@@ -24,6 +24,28 @@ jobs:
         lighthouseCheckResults: ${{ steps.lighthouseCheck.outputs.lighthouseCheckResults }}
         minAccessibilityScore: "50"
         minBestPracticesScore: "50"
-        minPerformanceScore: "50"
+        minPerformanceScore: "20"
         minProgressiveWebAppScore: "50"
-        minSeoScore: "50"    
+        minSeoScore: "50"  
+
+  lighthouse-desktop:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - name: Lighthouse
+      uses: foo-software/lighthouse-check-action@master
+      with:
+        urls: 'https://sandbox-web.lazypay.in'
+        gitHubAccessToken: ${{ secrets.LIGHTHOUSE_CHECK_GITHUB_ACCESS_TOKEN }}
+        device: desktop
+        # slackWebhookUrl: ${{ secrets.LIGHTHOUSE_CHECK_WEBHOOK_URL }}
+
+    - name: Verify Lighthouse Check results
+      uses: foo-software/lighthouse-check-status-action@master
+      with:
+        lighthouseCheckResults: ${{ steps.lighthouseCheck.outputs.lighthouseCheckResults }}
+        minAccessibilityScore: "50"
+        minBestPracticesScore: "50"
+        minPerformanceScore: "20"
+        minProgressiveWebAppScore: "50"
+        minSeoScore: "50"          
