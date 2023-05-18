@@ -19,7 +19,7 @@ jobs:
         echo "github.job_workflow_sha"
     - uses: actions/checkout@master
     - name: Lighthouse
-      uses: foo-software/lighthouse-check-action@v10.0.0
+      uses: foo-software/lighthouse-check-action@master
       env:
         GITHUB_TOKEN: ${{ secrets.LIGHTHOUSE_CHECK_GITHUB_ACCESS_TOKEN }}
       id: lighthouseCheck
@@ -28,7 +28,7 @@ jobs:
         # urls: 'https://sandbox-web.lazypay.in'
         prCommentEnabled: true
         prCommentSaveOld: true
-        gitHubAccessToken: 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
+        gitHubAccessToken: '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'
         # gitHubAccessToken: ${{ secrets.LIGHTHOUSE_CHECK_GITHUB_ACCESS_TOKEN }}
         # commentUrl: https://api.github.com/repos/basantPayU/tryout/commits/88120476f60e8be64700d2e6a3544f63d5cadc7f/comments
         # commentUrl: https://api.github.com/repos/:owner/:repo/commits/:commit_sha/comments
