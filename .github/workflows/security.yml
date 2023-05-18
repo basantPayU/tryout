@@ -42,24 +42,3 @@ jobs:
               repo: context.repo.repo,
               body: msg
             })
-
-        # with:
-        #   github-token: ${{secrets.GITHUB_TOKEN}}
-        #   script: |
-        #     const allSecurityHeaderPresent = `{{ steps.security-check.outputs.rating }}`=== "success"
-        #     const msg = allSecurityHeaderPresent ? 'All security header present 🚀' : 'Security Header missing, please check action form more details '
-        #     github.issues.createComment({
-        #       issue_number: context.issue.number,
-        #       owner: context.repo.owner,
-        #       repo: context.repo.repo,
-        #       body: '👋 Thanks for reporting!'
-        #     })
-      # - uses: marocchino/sticky-pull-request-comment@v2
-      #   with:
-      #     message: ${{ steps.coverage.outputs.report }}     
-      # - name: checking if output is available
-      #   id: check-output
-      #   run: echo "${{ steps.security-check.outputs.rating }}"
-       
-    
-
