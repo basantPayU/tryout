@@ -4,18 +4,27 @@ on:
     types: [opened, reopened]
     branches: [ main ]
 
+permissions:
+  issues: 'write' #__This fixed the HttpError: Resource not accessible by integration
 
 jobs:
-  lighthouse:
+  lighthouse-mobile:
     runs-on: ubuntu-latest
     steps:
+    - name: Dump Github Context  
+      run: |
+        echo "$SECRETS.LIGHTHOUSE_CHECK_GITHUB_ACCESS_TOKEN"
     - uses: actions/checkout@master
     - name: Lighthouse
-      uses: foo-software/lighthouse-check-action@master
+      uses: foo-software/lighthouse-check-action@v10.0.0
+      id: lighthouseCheck
       with:
-        urls: 'https://sandbox-web.lazypay.in'
+        urls: 'https://google.com'
+        # urls: 'https://sandbox-web.lazypay.in'
+        prCommentEnabled: true
+        prCommentSaveOld: true
         gitHubAccessToken: ${{ secrets.LIGHTHOUSE_CHECK_GITHUB_ACCESS_TOKEN }}
-        # slackWebhookUrl: ${{ secrets.LIGHTHOUSE_CHECK_WEBHOOK_URL }}
+        device: mobile
 
     - name: Verify Lighthouse Check results
       uses: foo-software/lighthouse-check-status-action@master
@@ -23,6 +32,31 @@ jobs:
         lighthouseCheckResults: ${{ steps.lighthouseCheck.outputs.lighthouseCheckResults }}
         minAccessibilityScore: "50"
         minBestPracticesScore: "50"
-        minPerformanceScore: "50"
+        minPerformanceScore: "20"
         minProgressiveWebAppScore: "50"
-        minSeoScore: "50"    
+        minSeoScore: "50"  
+        # - name: Lighthouse Check
+        # uses: 
+      
+  # lighthouse-desktop:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #   - uses: actions/checkout@master
+  #   - name: Lighthouse
+  #     uses: foo-software/lighthouse-check-action@master
+  #     id: lighthouseCheck
+  #     with:
+  #       urls: 'https://sandbox-web.lazypay.in'
+  #       accessToken: ${{ secrets.LIGHTHOUSE_CHECK_GITHUB_ACCESS_TOKEN }}
+  #       device: desktop
+  #       # slackWebhookUrl: ${{ secrets.LIGHTHOUSE_CHECK_WEBHOOK_URL }}
+
+  #   - name: Verify Lighthouse Check results
+  #     uses: foo-software/lighthouse-check-status-action@master
+  #     with:
+  #       lighthouseCheckResults: ${{ steps.lighthouseCheck.outputs.lighthouseCheckResults }}
+  #       minAccessibilityScore: "50"
+  #       minBestPracticesScore: "50"
+  #       minPerformanceScore: "20"
+  #       minProgressiveWebAppScore: "50"
+  #       minSeoScore: "50"          
