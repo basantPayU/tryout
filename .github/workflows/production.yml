@@ -1,12 +1,15 @@
 name: Lighthouse Check
-on: [pull_request]
+on:
+  pull_request:
+    types: [opened, reopened]
+    branches: [ main ]
 
-permissions:
-  pull-requests: write #__This fixed the HttpError: Resource not accessible by integration
+# permissions:
+#   pull-requests: write #__This fixed the HttpError: Resource not accessible by integration
 
 jobs:
   lighthouse-check:
-    permissions: write-all
+    # permissions: write-all
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@master
@@ -19,6 +22,7 @@ jobs:
         # accessToken: ${{ secrets.LIGHTHOUSE_CHECK_GITHUB_ACCESS_TOKEN }}
         outputDirectory: /tmp/artifacts
         urls: 'https://www.foo.software'
+        device: all
     - name: Upload artifacts
       uses: actions/upload-artifact@master
       with:
