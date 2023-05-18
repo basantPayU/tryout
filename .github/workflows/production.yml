@@ -15,7 +15,8 @@ jobs:
       uses: foo-software/lighthouse-check-action@master
       with:
         prCommentEnabled: true
-        accessToken: ${{ secrets.LIGHTHOUSE_CHECK_GITHUB_ACCESS_TOKEN }}
+        accessToken: ${{ secrets.GITHUB_TOKEN }}
+        # accessToken: ${{ secrets.LIGHTHOUSE_CHECK_GITHUB_ACCESS_TOKEN }}
         outputDirectory: /tmp/artifacts
         urls: 'https://www.foo.software'
     - name: Upload artifacts
