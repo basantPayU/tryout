@@ -3,7 +3,7 @@ on:
   pull_request:
     types: [opened, reopened]
     branches: [ main ]
-    
+
 permissions:
   contents: 'read'
   id-token: 'write'
@@ -13,6 +13,9 @@ jobs:
   lighthouse-mobile:
     runs-on: ubuntu-latest
     steps:
+    - name: Dump Github Context  
+      run: |
+        echo "$SECRETS.LIGHTHOUSE_CHECK_GITHUB_ACCESS_TOKEN"
     - uses: actions/checkout@master
     - name: Lighthouse
       uses: foo-software/lighthouse-check-action@v10.0.0
@@ -21,6 +24,7 @@ jobs:
         urls: 'https://google.com'
         # urls: 'https://sandbox-web.lazypay.in'
         prCommentEnabled: true
+        prCommentSaveOld: true
         gitHubAccessToken: ${{ secrets.LIGHTHOUSE_CHECK_GITHUB_ACCESS_TOKEN }}
         device: mobile
 
