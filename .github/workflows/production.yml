@@ -12,6 +12,7 @@ jobs:
     - uses: actions/checkout@master
     - name: Lighthouse
       uses: foo-software/lighthouse-check-action@master
+      id: lighthouseCheck
       with:
         urls: 'https://sandbox-web.lazypay.in'
         gitHubAccessToken: ${{ secrets.LIGHTHOUSE_CHECK_GITHUB_ACCESS_TOKEN }}
