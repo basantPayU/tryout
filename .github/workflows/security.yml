@@ -22,8 +22,9 @@ jobs:
     steps:
       - name: response-header-security-check
         id: security-check
+        uses: basantPayU/security-headers-check-github-action@tryout
         # uses: basantPayU/security-headers-check-github-action@main
-        uses: paysense-india-services/LPWEB-SecurityHeaderAction@main
+        # uses: paysense-india-services/LPWEB-SecurityHeaderAction@main
         with:
           url: 'https://sbox-securepsweb.paysense.io/mobile/terms'
       - name: 'Comment on PR'
@@ -32,7 +33,7 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            console.log('the output is', "${{ steps.security-check.outputs.rating }}")
+            console.log('the output is bazinga', "${{ steps.security-check.outputs.rating }}")
             const allSecurityHeaderPresent = "${{ steps.security-check.outputs.rating }}" ===  "success"
             const msg = allSecurityHeaderPresent ? "All security header present 🚀 " :  "Security Header missing, please check action for more details"
             await github.rest.issues.createComment({
