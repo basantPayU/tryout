@@ -22,10 +22,10 @@ jobs:
     steps:
       - name: response-header-security-check
         id: security-check
-        uses: basantPayU/security-headers-check-github-action@main
-        # uses: paysense-india-services/LPWEB-SecurityHeaderAction@main
+        # uses: basantPayU/security-headers-check-github-action@main
+        uses: paysense-india-services/LPWEB-SecurityHeaderAction@main
         with:
-          url: 'https://sandbox-web.lazypay.in/needhelp'
+          url: 'https://sbox-securepsweb.paysense.io/mobile/terms'
       - name: 'Comment on PR'
         id: security-check-comment
         uses: actions/github-script@v6
