@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/basantPayU/tryout/issues"
   },
-  "homepage": "https://github.com/basantPayU/tryout#readme"
+  "homepage": "https://github.com/basantPayU/tryout#readme",
+  "devDependencies": {
+    "lighthouse-badges": "^1.2.10"
+  }
 }

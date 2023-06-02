@@ -1,8 +1,17 @@
 name: Lighthouse Check
-on: [pull_request]
+on:
+  push:
+  pull_request:
+    types: [opened, reopened]
+    branches: [ main ]
+
+# permissions:
+#   pull-requests: write #__This fixed the HttpError: Resource not accessible by integration
 
 jobs:
   lighthouse-check:
+    if: ${{ github.event_name == 'pull_request' }}
+    
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@master
@@ -10,8 +19,12 @@ jobs:
     - name: Run Lighthouse
       uses: foo-software/lighthouse-check-action@master
       with:
+        prCommentEnabled: true
+        accessToken: ${{ secrets.GITHUB_TOKEN }}
+        # accessToken: ${{ secrets.LIGHTHOUSE_CHECK_GITHUB_ACCESS_TOKEN }}
         outputDirectory: /tmp/artifacts
         urls: 'https://www.foo.software'
+        device: all
     - name: Upload artifacts
       uses: actions/upload-artifact@master
       with:
