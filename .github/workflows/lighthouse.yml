@@ -8,8 +8,8 @@ on:
 jobs:
   lighthouse-scores:
 
-    uses: basantPayU/security-headers-check-github-action/.github/workflows/badger.yml@main
-    # uses: basantPayU/security-headers-check-github-action/.github/workflows/web-vitals.yml@main
+    # uses: basantPayU/security-headers-check-github-action/.github/workflows/badger.yml@main
+    uses: basantPayU/security-headers-check-github-action/.github/workflows/web-vitals.yml@main
     # uses: basantPayU/security-headers-check-github-action@tryout
     # uses: paysense-india-services/reusable-workflow/.github/workflows/security-review-cron.yml@main
     with:
