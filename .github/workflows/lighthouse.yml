@@ -1,0 +1,14 @@
+
+name: Lighthouse from reusable workflow
+
+on:
+  pull_request:
+    types: [opened, reopened]
+    branches: [ main ]
+jobs:
+  scan-secuity-headers:
+    uses: paysense-india-services/reusable-workflow/.github/workflows/web-vitals-scan.yml@feature/TCWEB-1382
+    # uses: paysense-india-services/reusable-workflow/.github/workflows/security-review-cron.yml@main
+    with:
+      url: https://sandbox-web.lazypay.in/
+    secrets: inherit
