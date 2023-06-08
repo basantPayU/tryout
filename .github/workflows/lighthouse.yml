@@ -12,3 +12,24 @@ jobs:
     with:
       url: https://sandbox-web.lazypay.in/
     secrets: inherit
+
+  add-lighthouse-badges:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 14
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run NPM Command
+        run: npm -g lighthouse-badges
+        
+      - name: Run Lighthouse Badges
+        run: npx lighthouse-badges --url https://sandbox-web.lazypay.in/ -o lighthouse_test_results
+        
