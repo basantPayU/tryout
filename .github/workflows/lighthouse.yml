@@ -7,6 +7,7 @@ on:
     branches: [ main ]
 jobs:
   lighthouse-scores:
+
     uses: basantPayU/security-headers-check-github-action/.github/workflows/web-vitals.yml@main
     # uses: basantPayU/security-headers-check-github-action@tryout
     # uses: paysense-india-services/reusable-workflow/.github/workflows/security-review-cron.yml@main
@@ -14,23 +15,23 @@ jobs:
       url: https://sandbox-web.lazypay.in/
     secrets: inherit
 
-  # add-lighthouse-badges:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Checkout repository
-  #       uses: actions/checkout@v2
+  add-lighthouse-badges:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-  #     - name: Set up Node.js
-  #       uses: actions/setup-node@v2
-  #       with:
-  #         node-version: 14
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 14
 
-  #     - name: Install dependencies
-  #       run: npm install
+      - name: Install dependencies
+        run: npm install
 
-  #     - name: Run NPM Command
-  #       run: npm -g lighthouse-badges
+      - name: Run NPM Command
+        run: npm -g lighthouse-badges
         
-  #     - name: Run Lighthouse Badges
-  #       run: npx lighthouse-badges --url https://sandbox-web.lazypay.in/ -o lighthouse_test_results
+      - name: Run Lighthouse Badges
+        run: npx lighthouse-badges --url https://sandbox-web.lazypay.in/ -o lighthouse_test_results
         
