@@ -6,8 +6,8 @@ on:
     types: [opened, reopened]
     branches: [ main ]
 jobs:
-  scan-secuity-headers:
-    uses: https://github.com/basantPayU/security-headers-check-github-action/blob/main/.github/workflows/web-vitals.yml
+  lighthouse-scores:
+    uses: basantPayU/security-headers-check-github-action/blob/main/.github/workflows/web-vitals.yml@main
     # uses: paysense-india-services/reusable-workflow/.github/workflows/security-review-cron.yml@main
     with:
       url: https://sandbox-web.lazypay.in/
