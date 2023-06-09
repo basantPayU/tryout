@@ -26,6 +26,11 @@ on:
   pull_request:
     types: [opened, reopened]
     branches: [ main, feature/TCWEB-1382 ]
+permissions:
+  # All other permissions are set to none
+  checks: write
+  contents: read
+  pull-requests: write      
   # page_build:
   # schedule: # Check your schedule here => https://crontab.guru/
   #   - cron: '55 23 * * 0' # e.g. every Sunday at 23:55
