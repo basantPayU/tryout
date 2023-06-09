@@ -1,62 +1,109 @@
-name: Lighthouse
+name: Lighthouse Check
 on:
+  push:
   pull_request:
     types: [opened, reopened]
     branches: [ main ]
 
-permissions:
-  issues: 'write' #__This fixed the HttpError: Resource not accessible by integration
+# permissions:
+#   pull-requests: write #__This fixed the HttpError: Resource not accessible by integration
 
 jobs:
-  lighthouse-mobile:
+  lighthouse-check:
+    if: ${{ github.event_name == 'pull_request' }}
+    
     runs-on: ubuntu-latest
     steps:
-    - name: Dump Github Context  
-      run: |
-        echo "$SECRETS.LIGHTHOUSE_CHECK_GITHUB_ACCESS_TOKEN"
     - uses: actions/checkout@master
-    - name: Lighthouse
-      uses: foo-software/lighthouse-check-action@v10.0.0
-      id: lighthouseCheck
+    - run: mkdir /tmp/artifacts
+    - name: Run Lighthouse
+      uses: foo-software/lighthouse-check-action@master
       with:
-        urls: 'https://google.com'
-        # urls: 'https://sandbox-web.lazypay.in'
         prCommentEnabled: true
-        prCommentSaveOld: true
-        gitHubAccessToken: ${{ secrets.LIGHTHOUSE_CHECK_GITHUB_ACCESS_TOKEN }}
-        device: mobile
-
-    - name: Verify Lighthouse Check results
-      uses: foo-software/lighthouse-check-status-action@master
+        accessToken: ${{ secrets.GITHUB_TOKEN }}
+        # accessToken: ${{ secrets.LIGHTHOUSE_CHECK_GITHUB_ACCESS_TOKEN }}
+        outputDirectory: /tmp/artifacts
+        urls: 'https://www.foo.software'
+        device: all
+    - name: Upload artifacts
+      uses: actions/upload-artifact@master
       with:
-        lighthouseCheckResults: ${{ steps.lighthouseCheck.outputs.lighthouseCheckResults }}
-        minAccessibilityScore: "50"
-        minBestPracticesScore: "50"
-        minPerformanceScore: "20"
-        minProgressiveWebAppScore: "50"
-        minSeoScore: "50"  
-        # - name: Lighthouse Check
-        # uses: 
-      
-  # lighthouse-desktop:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #   - uses: actions/checkout@master
-  #   - name: Lighthouse
-  #     uses: foo-software/lighthouse-check-action@master
-  #     id: lighthouseCheck
-  #     with:
-  #       urls: 'https://sandbox-web.lazypay.in'
-  #       accessToken: ${{ secrets.LIGHTHOUSE_CHECK_GITHUB_ACCESS_TOKEN }}
-  #       device: desktop
-  #       # slackWebhookUrl: ${{ secrets.LIGHTHOUSE_CHECK_WEBHOOK_URL }}
+        name: Lighthouse reports
+        path: /tmp/artifacts
 
-  #   - name: Verify Lighthouse Check results
-  #     uses: foo-software/lighthouse-check-status-action@master
-  #     with:
-  #       lighthouseCheckResults: ${{ steps.lighthouseCheck.outputs.lighthouseCheckResults }}
-  #       minAccessibilityScore: "50"
-  #       minBestPracticesScore: "50"
-  #       minPerformanceScore: "20"
-  #       minProgressiveWebAppScore: "50"
-  #       minSeoScore: "50"          
+
+
+
+# name: Lighthouse
+# on:
+#   pull_request:
+#     types: [opened, reopened]
+#     branches: [ main ]
+
+# permissions:
+#   issues: 'write' #__This fixed the HttpError: Resource not accessible by integration
+
+# jobs:
+#   lighthouse-mobile:
+#     runs-on: ubuntu-latest
+#     steps:
+#     - name: Dump Github Context  
+#       run: |
+#         echo "$SECRETS.LIGHTHOUSE_CHECK_GITHUB_ACCESS_TOKEN"
+#         echo "$GITHUB_CONTEXT"
+#         echo "$GITHUB_CONTEXT.github.repository"
+#         echo "github.job_workflow_sha"
+#     - uses: actions/checkout@master
+#     - run: mkdir -p ${{ github.workspace }}/tmp/artifacts
+#     - name: Lighthouse
+#       uses: foo-software/lighthouse-check-action@master
+#       env:
+#         GITHUB_TOKEN: ${{ secrets.LIGHTHOUSE_CHECK_GITHUB_ACCESS_TOKEN }}
+#       id: lighthouseCheck
+#       with:
+#         outputDirectory: ${{ github.workspace }}/tmp/artifacts
+#         urls: 'https://google.com'
+#         # urls: 'https://sandbox-web.lazypay.in'
+#         prCommentEnabled: true
+#         prCommentSaveOld: true
+#         sha: ${{ github.sha }}
+#         gitAuthor: ${{ github.actor }}
+#         gitBranch: ${{ github.ref }}
+#         gitHubAccessToken: ${{ secrets.LIGHTHOUSE_CHECK_GITHUB_ACCESS_TOKEN }}
+#         # commentUrl: https://api.github.com/repos/basantPayU/tryout/commits/88120476f60e8be64700d2e6a3544f63d5cadc7f/comments
+#         device: mobile
+
+#     - name: Verify Lighthouse Check results
+#       uses: foo-software/lighthouse-check-status-action@master
+#       with:
+#         lighthouseCheckResults: ${{ steps.lighthouseCheck.outputs.lighthouseCheckResults }}
+#         minAccessibilityScore: "50"
+#         minBestPracticesScore: "50"
+#         minPerformanceScore: "20"
+#         minProgressiveWebAppScore: "50"
+#         minSeoScore: "50"  
+#         # - name: Lighthouse Check
+#         # uses: 
+      
+#   # lighthouse-desktop:
+#   #   runs-on: ubuntu-latest
+#   #   steps:
+#   #   - uses: actions/checkout@master
+#   #   - name: Lighthouse
+#   #     uses: foo-software/lighthouse-check-action@master
+#   #     id: lighthouseCheck
+#   #     with:
+#   #       urls: 'https://sandbox-web.lazypay.in'
+#   #       accessToken: ${{ secrets.LIGHTHOUSE_CHECK_GITHUB_ACCESS_TOKEN }}
+#   #       device: desktop
+#   #       # slackWebhookUrl: ${{ secrets.LIGHTHOUSE_CHECK_WEBHOOK_URL }}
+
+#   #   - name: Verify Lighthouse Check results
+#   #     uses: foo-software/lighthouse-check-status-action@master
+#   #     with:
+#   #       lighthouseCheckResults: ${{ steps.lighthouseCheck.outputs.lighthouseCheckResults }}
+#   #       minAccessibilityScore: "50"
+#   #       minBestPracticesScore: "50"
+#   #       minPerformanceScore: "20"
+#   #       minProgressiveWebAppScore: "50"
+#   #       minSeoScore: "50"          
