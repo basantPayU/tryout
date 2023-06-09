@@ -1,0 +1,18 @@
+
+name: Add lighthouse badges to readme
+
+on:
+  pull_request:
+    types: [opened, reopened]
+    branches: [ main ]  
+  schedule:
+    - cron: '30 20 * * 1,4'
+
+jobs:
+  scan-secuity-headers:
+    uses: basantPayU/security-headers-check-github-action/.github/workflows/lighthouse-badger-easy.yml@main
+    with:
+      url: https://sandbox-web.lazypay.in/
+      token: "LIGHTHOUSE_CHECK_GITHUB_ACCESS_TOKEN"
+      branch: main
+    secrets: inherit
