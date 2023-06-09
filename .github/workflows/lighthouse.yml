@@ -31,8 +31,8 @@ jobs:
         run: npm install
 
       - name: Run NPM Command
-        run: npm -g lighthouse-badges
+        run: npm i -g lighthouse-badges
         
       - name: Run Lighthouse Badges
-        run: npm lighthouse-badges --url https://sandbox-web.lazypay.in/ -o lighthouse_test_results
+        run: lighthouse-badges --url https://sandbox-web.lazypay.in/ -o lighthouse_test_results
         
