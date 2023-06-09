@@ -19,7 +19,7 @@ env:
   TOKEN_NAME: "LIGHTHOUSE_CHECK_GITHUB_ACCESS_TOKEN"
   # TOKEN_NAME: ${{ secrets.GITHUB_TOKEN }} # target token name; insert only the name never the real value e.g. 'LIGHTHOUSE_BADGER_TOKEN'
   # THAT'S IT; JUMP TO THE TRIGGERS;
-  REPO_BRANCH: 'main' # target repo & branch
+  REPO_BRANCH: '${{ github.repository }} main' # target repo & branch
 
 # TRIGGERS
 on:
